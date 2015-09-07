@@ -1,13 +1,12 @@
 {
   "name": "koa-template",
   "version": "1.0.0",
-  "description": "",
+  "description": "a node server depend on jwt Authentication",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --harmony -e js,json index.js"
   },
-  "author": "",
+  "author": "cyt",
   "license": "ISC",
   "dependencies": {
     "co": "^4.6.0",
