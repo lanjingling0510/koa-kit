@@ -1,6 +1,5 @@
 node_modules
 *.log
 upload
-config.json
 .idea
 
