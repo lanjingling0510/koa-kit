@@ -4,7 +4,6 @@ const router = require('koa-router')();
 const passport = require('../common/passport');
 const config = require('../config.json');
 const jwt = require('jsonwebtoken');
-const koaBodyParser = require('koa-body');
 const debug = require('debug');
 debug.enable('auth:*');
 const log = debug('auth:');
@@ -47,7 +46,7 @@ const fetchAdminProfile = function* () {
 };
 
 
-router.post('/token', koaBodyParser(), passport.authenticate('local', {
+router.post('/token', passport.authenticate('local', {
     session: false
 }), exchangeToken);
 

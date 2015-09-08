@@ -4,7 +4,6 @@ const router = require('koa-router')();
 const passport = require('../common/passport');
 const User = require('../models').User;
 const hashword = require('hashword');
-const koaBodyParser = require('koa-body');
 
 const createUser = function* () {
     const ctx = this;
@@ -23,7 +22,7 @@ const createUser = function* () {
     }
 };
 
-router.post('/', koaBodyParser(), createUser);
+router.post('/', createUser);
 
 
 //router.use(passport.authenticate('jwt', {session: false}));
