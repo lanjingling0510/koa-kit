@@ -14,14 +14,16 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const createUser = function* () {
     const ctx = this;
-    const password = ctx.request.body.password;
+    const body = ctx.request.body;
+    const password = body.password;
     try {
         if (!(/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,22}$/.test(password))) {
             throw new Error('密码长度为6-22!');
         }
 
         const user = {
-            username: ctx.request.body.username,
+            nickname: body.nickname,
+            username: body.username,
             passhash: hashword.hashPassword(password),
             updatedAt: new Date()
         };

@@ -7,48 +7,67 @@ const jwt = require('jsonwebtoken');
 
 // 通过用户名密码换取token，使用JSON Web Token
 const exchangeToken = function* () {
-    const ctx = this;
-    const user = ctx.req.user;
-    const payload = {
-        userId: user._id.toString(),
-        type: user.type
-    };
-    const secret = config.jwt.secret;
-    const options = {
-        algorithm: config.jwt.algorithm,
-        expiresInMinutes: config.jwt.expires_in_minutes,
-        audience: config.jwt.audience,
-        subject: config.jwt.subject,
-        issuer: config.jwt.issuer,
-        noTimestamp: false,
-        headers: {}
-    };
+  const ctx = this;
+  const user = ctx.req.user;
+  const payload = {
+    userId: user._id.toString(),
+    type: user.type
+  };
+  const secret = config.jwt.secret;
+  const options = {
+    algorithm: config.jwt.algorithm,
+    expiresInMinutes: config.jwt.expires_in_minutes,
+    audience: config.jwt.audience,
+    subject: config.jwt.subject,
+    issuer: config.jwt.issuer,
+    noTimestamp: false,
+    headers: {}
+  };
 
-    const userJWT = jwt.sign(payload, secret, options);
-    this.body = {
-        access_token: userJWT
-    };
+  const userJWT = jwt.sign(payload, secret, options);
+  this.body = {
+    access_token: userJWT
+  };
 };
-
 
 // 获取登陆用户的信息
 const fetchAdminProfile = function* () {
-    const user = this.req.user;
-    this.body = {
-        _id: user._id,
-        id: user._id,
-        username: user.username,
-        type: user.type
-    };
+  const user = this.req.user;
+
+  this.body = {
+    _id: user._id,
+    id: user._id,
+    username: user.username,
+    nickname: user.nickname,
+    type: user.type
+  };
 };
 
 
 router.post('/token', passport.authenticate('local', {
-    session: false
+  session: false
 }), exchangeToken);
 
+router.get('/token/wechat', passport.authenticate('wechat-token', {
+  session: false
+}));
+
+router.get('/token/qq', passport.authenticate('qq-token', {
+  session: false
+}));
+
+router.get('/token/qq/callback',
+  passport.authenticate('qq-token', {
+    session: false,
+    failureRedirect: 'http://www.cyt-rain.cn/test'
+  }),
+  function *() {
+    const res = this.response;
+    res.redirect('http://www.cyt-rain.cn');
+  });
+
 router.get('/profile', passport.authenticate('jwt', {
-    session: false
+  session: false
 }), fetchAdminProfile);
 
 module.exports = router;

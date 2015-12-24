@@ -7,6 +7,7 @@ const filter = new mongooseValidateFilter.filter();
 
 const UserSchema = mongoose.Schema({
     username: {type: String, unique: true},
+    nickname: String,
     passhash: String,
     type: {type: String, default: 'user'},
     createdAt: {type: Date, default: Date.now},
