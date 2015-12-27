@@ -4,7 +4,8 @@
   "description": "a node server depend on jwt Authentication",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --harmony -e js,json index.js"
+    "start": "nodemon --harmony -e js,json index.js",
+    "test": "./node_modules/.bin/mocha --harmony --bail --reporter spec test/functional"
   },
   "author": "cyt",
   "license": "ISC",
@@ -28,6 +29,7 @@
     "mongoose-validatefilter": "0.0.18",
     "passport-jwt": "^1.1.1",
     "passport-local": "^1.0.0",
+    "passport-qq2015": "^1.0.0",
     "request": "^2.67.0",
     "socket.io": "^1.3.7"
   },

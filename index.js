@@ -32,9 +32,7 @@ app
     origin: '*'
   }))
   .use(passport.initialize())
-  .use(require('./auth').routes())
-  .use(require('./test').routes())
-  .use(require('./user').routes());
+  .use(require('./v1').routes());
 
 app.on('error', function (err, ctx) {
   log('server error', err);

@@ -2,4 +2,6 @@ node_modules
 *.log
 upload
 .idea
-
+bin
+./config.json
+./remote-sync.json
