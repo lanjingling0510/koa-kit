@@ -4,4 +4,4 @@ upload
 .idea
 bin
 config.json
-remote-sync.json
+.remote-sync.json
