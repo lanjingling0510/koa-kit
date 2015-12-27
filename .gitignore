@@ -3,5 +3,5 @@ node_modules
 upload
 .idea
 bin
-./config.json
-./remote-sync.json
+config.json
+remote-sync.json
